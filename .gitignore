@@ -2,3 +2,4 @@
 /.idea/
 /src/.env
 /src/.coverage
+/src/htmlcov/
