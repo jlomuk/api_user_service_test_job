@@ -26,7 +26,7 @@ def test_login_not_existing_user(test_client: TestClient, create_user_db):
 def test_login_wrong_password(test_client: TestClient, create_user_db):
     body = {
         'username': 'Test1',
-        'password': 'passwordWrong'
+        'password': 'pass'
     }
     response = test_client.post(URL, json=body)
     assert response.status_code == 400

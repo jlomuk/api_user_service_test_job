@@ -3,3 +3,4 @@
 /src/.env
 /src/.coverage
 /src/htmlcov/
+__pycache__/

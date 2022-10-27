@@ -6,22 +6,21 @@ from services.auth_service import AuthService
 
 class AuthBase(BaseModel):
     username: str
-    password: str = Field(min_length=8)
+    password: str
 
-    @root_validator(pre=True)
-    def hash_passwords(cls, values):
+    @root_validator
+    def validators_password(cls, values):
+        values = cls.hash_password(values)
+        return values
+
+    @staticmethod
+    def hash_password(values):
         password, password_repeat = values.get('password'), values.get('password_repeat')
         if password:
-            cls.check_length_pass(password)
             values['password'] = AuthService.hash_password(password)
         if password_repeat:
             values['password_repeat'] = AuthService.hash_password(password_repeat)
         return values
-
-    @staticmethod
-    def check_length_pass(password):
-        if len(password) < 8:
-            raise ValueError('Пароль меньше 8 символов')
 
 
 class LoginRequest(AuthBase):
@@ -32,7 +31,9 @@ class RegistrationRequest(AuthBase):
     password_repeat: str = Field(..., exclude=True)
 
     @validator('password_repeat')
-    def passwords_match(cls, v, values):
+    def passwords_check(cls, v, values):
+        if len(v) < 8:
+            raise ValueError('Пароль меньше 8 символов')
         if v != values['password']:
             raise ValueError('Пароли не совпадают')
         return v
