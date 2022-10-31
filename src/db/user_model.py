@@ -8,7 +8,6 @@ from settings import settings
 
 engine = create_engine(settings.POSTGRES_URL, echo=True)
 metadata_obj = MetaData()
-metadata_obj.create_all(engine)
 
 users = sq.Table(
     'users',
@@ -23,3 +22,7 @@ database: Database = Database(settings.POSTGRES_URL)
 
 def get_db():
     return database
+
+
+def init_db():
+    metadata_obj.create_all(engine)

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from api import root_router
-from db.user_model import get_db
+from db.user_model import get_db, init_db
 
 app = FastAPI(
     swagger_ui_parameters={"syntaxHighlight.theme": "obsidian"},
@@ -13,6 +13,7 @@ app.include_router(root_router)
 
 @app.on_event("startup")
 async def startup():
+    init_db()
     db = get_db()
     await db.connect()
 
