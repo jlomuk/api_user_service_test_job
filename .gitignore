@@ -2,3 +2,6 @@
 /.idea/
 /src/.env
 /src/.coverage
+/src/htmlcov/
+__pycache__/
+/ci/.env

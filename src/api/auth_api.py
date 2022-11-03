@@ -45,8 +45,6 @@ async def login(user_request: auth_schema.LoginRequest, auth_service: AuthServic
 async def registration(new_user: auth_schema.RegistrationRequest, auth_service: AuthService = Depends(AuthService),
                        db=Depends(get_db)):
     user = await create_user(new_user.dict(), db)
-    print(user, 34343434)
-    # user = await get_user_by_id(user_id, db)
     return auth_service.create_jwt_tokens(user)
 
 

@@ -3,6 +3,7 @@ from pydantic import BaseSettings, SecretStr, PostgresDsn
 
 class Settings(BaseSettings):
     POSTGRES_URL: PostgresDsn = ''
+    POSTGRES_TEST_URL: PostgresDsn = ''
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 600  # 5 minutes
     REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 3  # 3 days
