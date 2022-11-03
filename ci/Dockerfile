@@ -13,3 +13,6 @@ COPY src/requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY src/ .
+
+CMD uvicorn app:app --reload --host 0.0.0.0 --port 8001
+EXPOSE 8001
