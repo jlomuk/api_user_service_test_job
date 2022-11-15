@@ -5,3 +5,4 @@
 /src/htmlcov/
 __pycache__/
 /ci/.env
+.vscode
